@@ -233,3 +233,72 @@ Build.demand=Q_demand_hourly;
 
 %% TASK 4 - Clustering of the heating demand
 % based on the hourly heating demand (typical periods)
+
+
+Text_n = (Text - mean(Text))/std(Text);
+Irr_n = (Irr - mean(Irr))/std(Irr);
+X_n = [Text_n Irr_n];
+
+[idx, C, ~, D] = kmeans(X_n,5);
+C(:,1) = (C(:,1)).*std(Text) + mean(Text);
+C(:,2) = (C(:,2)).*std(Irr) + mean(Irr);
+X = [Text Irr];
+
+
+Sum1 = 0;
+for i = 1:5
+    Sum1 = Sum1 + sum(sum((X(idx == i, :) - C(i, :)).^2)); 
+end
+
+RMSE1 = sqrt((1/length(Text))*Sum1);
+
+
+
+
+figure;
+plot(X(idx==1,1),X(idx==1,2),'r.','MarkerSize',12)
+hold on
+plot(X(idx==2,1),X(idx==2,2),'b.','MarkerSize',12)
+hold on
+plot(X(idx==3,1),X(idx==3,2),'g.','MarkerSize',12)
+hold on
+plot(X(idx==4,1),X(idx==4,2),'y.','MarkerSize',12)
+hold on
+plot(X(idx==5,1),X(idx==5,2),'c.','MarkerSize',12)
+plot(C(:,1),C(:,2),'kx',...
+     'MarkerSize',15,'LineWidth',3) 
+legend('Cluster 1','Cluster 2','Cluster 3','Cluster 4','Cluster 5','Centroids',...
+       'Location','NW')
+title 'Cluster Assignments and Centroids'
+hold off
+
+
+Text_s = reshape(Text, 1752, 5);
+Text_p = num2cell(Text_s, 1);
+
+Mean_T1 = mean(Text_p{1});
+Mean_T2 = mean(Text_p{2});
+Mean_T3 = mean(Text_p{3});
+Mean_T4 = mean(Text_p{4});
+Mean_T5 = mean(Text_p{5});
+Mean_T = [Mean_T1; Mean_T2; Mean_T3; Mean_T4; Mean_T5];
+
+Irr_s = reshape(Irr, 1752, 5);
+Irr_p = num2cell(Irr_s, 1);
+
+Mean_Irr1 = mean(Irr_p{1});
+Mean_Irr2 = mean(Irr_p{2});
+Mean_Irr3 = mean(Irr_p{3});
+Mean_Irr4 = mean(Irr_p{4});
+Mean_Irr5 = mean(Irr_p{5});
+Mean_Irr = [Mean_Irr1; Mean_Irr2; Mean_Irr3; Mean_Irr4; Mean_Irr5];
+
+size(Text_p{1})
+size(Mean_T)
+Sum2 = 0
+
+for i = 1:5
+    Sum2 = Sum2 + sum((Text_p{i} - Mean_T(i)).^2) + sum((Irr_p{i} - Mean_Irr(i)).^2);
+end
+
+RMSE2 = sqrt((1/length(Text))*Sum2);
