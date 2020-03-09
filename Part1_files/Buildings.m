@@ -246,6 +246,14 @@ C(:,1) = (C(:,1)).*std(Text) + mean(Text);
 C(:,2) = (C(:,2)).*std(Irr) + mean(Irr);
 X = [Text Irr];
 
+t_op1 = nnz(idx == 1);
+t_op2 = nnz(idx == 2);
+t_op3 = nnz(idx == 3);
+t_op4 = nnz(idx == 4);
+t_op5 = nnz(idx == 5);
+T_op = [t_op1 t_op2 t_op3 t_op4 t_op5];
+
+
 %Calculating the profile deviation for the whole year (Root mean squared error)
 Sum1 = 0;
 for i = 1:5
@@ -276,7 +284,7 @@ plot(C(:,1),C(:,2),'kx',...
      'MarkerSize',15,'LineWidth',3) 
 legend('Cluster 1','Cluster 2','Cluster 3','Cluster 4','Cluster 5','Centroids',...
        'Location','NW')
-title 'Cluster Assignments and Centroids'
+% title 'Cluster Assignments and Centroids'
 xlabel('Temperature (\circC)')
 ylabel('Irradiation (W/m2)')
 hold off
