@@ -235,26 +235,33 @@ Build.demand=Q_demand_hourly;
 % based on the hourly heating demand (typical periods)
 
 
+% Normalizing  the weather data
 Text_n = (Text - mean(Text))/std(Text);
 Irr_n = (Irr - mean(Irr))/std(Irr);
 X_n = [Text_n Irr_n];
 
-[idx, C, ~, D] = kmeans(X_n,5);
+%Clustering the weather using the k-means algorithm with k = 5
+[idx, C] = kmeans(X_n,5);
 C(:,1) = (C(:,1)).*std(Text) + mean(Text);
 C(:,2) = (C(:,2)).*std(Irr) + mean(Irr);
 X = [Text Irr];
 
-
+%Calculating the profile deviation for the whole year (Root mean squared error)
 Sum1 = 0;
 for i = 1:5
     Sum1 = Sum1 + sum(sum((X(idx == i, :) - C(i, :)).^2)); 
 end
 
-RMSE1 = sqrt((1/length(Text))*Sum1);
+RMSE1_year = sqrt((1/length(Text))*Sum1);
 
+%Calculating the profile deviation for each typical period
+RMSE1_period = zeros(5,1);
+for i = 1:5
+    N = length(X(idx == i, :));
+    RMSE1_period(i) =  sqrt((1/N)*sum(sum((X(idx == i, :) - C(i, :)).^2))); 
+end
 
-
-
+%Plotting the clustered data
 figure;
 plot(X(idx==1,1),X(idx==1,2),'r.','MarkerSize',12)
 hold on
@@ -270,12 +277,15 @@ plot(C(:,1),C(:,2),'kx',...
 legend('Cluster 1','Cluster 2','Cluster 3','Cluster 4','Cluster 5','Centroids',...
        'Location','NW')
 title 'Cluster Assignments and Centroids'
+xlabel('Temperature (\circC)')
+ylabel('Irradiation (W/m2)')
 hold off
 
-
+%Divide the year into 5 periods of equal length
 Text_s = reshape(Text, 1752, 5);
 Text_p = num2cell(Text_s, 1);
 
+%Calculate the mean Temperature for each period
 Mean_T1 = mean(Text_p{1});
 Mean_T2 = mean(Text_p{2});
 Mean_T3 = mean(Text_p{3});
@@ -283,9 +293,11 @@ Mean_T4 = mean(Text_p{4});
 Mean_T5 = mean(Text_p{5});
 Mean_T = [Mean_T1; Mean_T2; Mean_T3; Mean_T4; Mean_T5];
 
+%Divide the year into 5 periods of equal length
 Irr_s = reshape(Irr, 1752, 5);
 Irr_p = num2cell(Irr_s, 1);
 
+%Calculate the mean Irradiation for each period
 Mean_Irr1 = mean(Irr_p{1});
 Mean_Irr2 = mean(Irr_p{2});
 Mean_Irr3 = mean(Irr_p{3});
@@ -293,12 +305,20 @@ Mean_Irr4 = mean(Irr_p{4});
 Mean_Irr5 = mean(Irr_p{5});
 Mean_Irr = [Mean_Irr1; Mean_Irr2; Mean_Irr3; Mean_Irr4; Mean_Irr5];
 
-size(Text_p{1})
-size(Mean_T)
-Sum2 = 0
+
+%Calculating the profile deviation for the whole year (Root mean squared error)
+Sum2 = 0;
 
 for i = 1:5
     Sum2 = Sum2 + sum((Text_p{i} - Mean_T(i)).^2) + sum((Irr_p{i} - Mean_Irr(i)).^2);
 end
 
-RMSE2 = sqrt((1/length(Text))*Sum2);
+RMSE2_year = sqrt((1/length(Text))*Sum2);
+
+%Calculating the profile deviation for each period (Root mean squared error)
+RMSE2_period = zeros(5,1);
+for i = 1:5
+    N = length(Text_p{i});
+    RMSE2_period(i) =  sqrt((1/N)*(sum((Text_p{i} - Mean_T(i)).^2) + sum((Irr_p{i} - Mean_Irr(i)).^2)));
+end
+
