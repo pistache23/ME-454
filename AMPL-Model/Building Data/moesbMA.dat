@@ -1,0 +1,17 @@
+let Buildings := Buildings union {'MA'};								# Add "BuildMAg1" to set of BuildMAgs
+let MediumTempBuildings := MediumTempBuildings union {'MA'}; 		# Decide if it belongs to Medium or Low Temperature BuildMAgs
+
+###########BUILDMAG SPECIFIC PARAMETER  Time  MAdependend ##########################
+
+let FloorArea['MA'] := 14018;
+let k_th['MA']:= 0.00985 ;												# ATTENTION unit MA kW
+let k_sun['MA']:= 0.18;
+let specQ_people['MA']:= 0.0545082;										# ATTENTION unit MA kW
+
+###########BUILDMAG SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['MA',1] := 1513.8/FloorArea['MA'];										# ATTENTION unit MA kW
+let specElec['MA',2] := 1513.8/FloorArea['MA'];	
+let specElec['MA',3] := 1513.8/FloorArea['MA'];										# ATTENTION unit MA kW
+let specElec['MA',4] := 1513.8/FloorArea['MA'];	
+let specElec['MA',5] := 327.4/FloorArea['MA'];										# ATTENTION unit MA kW
+let specElec['MA',6] := 0;	

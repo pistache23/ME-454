@@ -1,0 +1,17 @@
+let Buildings := Buildings union {'ME'};								# Add "BuildMEg1" to set of BuildMEgs
+let LowTempBuildings := LowTempBuildings union {'ME'}; 		# Decide if it belongs to Medium or Low Temperature BuildMEgs
+
+###########BUILDMEG SPECIFIC PARAMETER  Time  MEdependend ##########################
+
+let FloorArea['ME'] := 17151;
+let k_th['ME']:= 0.00361 ;												# ATTENTION unit ME kW
+let k_sun['ME']:= 0.05;
+let specQ_people['ME']:= 0.0545082;										# ATTENTION unit ME kW
+
+###########BUILDMEG SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['ME',1] := 853.3/FloorArea['ME'];										# ATTENTION unit ME kW
+let specElec['ME',2] := 853.3/FloorArea['ME'];	
+let specElec['ME',3] := 853.3/FloorArea['ME'];										# ATTENTION unit ME kW
+let specElec['ME',4] := 853.3/FloorArea['ME'];	
+let specElec['ME',5] := 184.5/FloorArea['ME'];										# ATTENTION unit ME kW
+let specElec['ME',6] := 0;	

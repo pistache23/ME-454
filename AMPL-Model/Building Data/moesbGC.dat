@@ -1,0 +1,17 @@
+let Buildings := Buildings union {'GC'};								# Add "BuildGCg1" to set of BuildGCgs
+let MediumTempBuildings := MediumTempBuildings union {'GC'}; 		# Decide if it belongs to Medium or Low Temperature BuildGCgs
+
+###########BUILDGCG SPECIFIC PARAMETER  Time  GCdependend ##########################
+
+let FloorArea['GC'] := 26586;
+let k_th['GC']:= 0.00488 ;												# ATTENTION unit GC kW
+let k_sun['GC']:= 0.09;
+let specQ_people['GC']:= 0.0545082;										# ATTENTION unit GC kW
+
+###########BUILDGCG SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['GC',1] := 541.4/FloorArea['GC'];										# ATTENTION unit GC kW
+let specElec['GC',2] := 541.4/FloorArea['GC'];	
+let specElec['GC',3] := 541.4/FloorArea['GC'];										# ATTENTION unit GC kW
+let specElec['GC',4] := 541.4/FloorArea['GC'];	
+let specElec['GC',5] := 117.1/FloorArea['GC'];										# ATTENTION unit GC kW
+let specElec['GC',6] := 0;	

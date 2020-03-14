@@ -1,0 +1,17 @@
+let Buildings := Buildings union {'GR'};								# Add "BuildGRg1" to set of BuildGRgs
+let MediumTempBuildings := MediumTempBuildings union {'GR'}; 		# Decide if it belongs to Medium or Low Temperature BuildGRgs
+
+###########BUILDGRG SPECIFIC PARAMETER  Time  GRdependend ##########################
+
+let FloorArea['GR'] := 9997;
+let k_th['GR']:= 0.00297 ;												# ATTENTION unit GR kW
+let k_sun['GR']:= 0.01;
+let specQ_people['GR']:= 0.0545082;										# ATTENTION unit GR kW
+
+###########BUILDGRG SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['GR',1] := 222.7/FloorArea['GR'];										# ATTENTION unit GR kW
+let specElec['GR',2] := 222.7/FloorArea['GR'];	
+let specElec['GR',3] := 222.7/FloorArea['GR'];										# ATTENTION unit GR kW
+let specElec['GR',4] := 222.7/FloorArea['GR'];	
+let specElec['GR',5] := 48.2/FloorArea['GR'];										# ATTENTION unit GR kW
+let specElec['GR',6] := 0;	

@@ -1,0 +1,19 @@
+
+
+let Buildings := Buildings union {'CRPP'};								# Add "Building1" to set of Buildings
+let LowTempBuildings := LowTempBuildings union {'CRPP'}; 		# Decide if it belongs to Medium or Low Temperature Buildings
+
+###########BUILDING SPECIFIC PARAMETER  Time  Independend ##########################
+
+let FloorArea['CRPP'] := 10831;
+let k_th['CRPP']:= 5.25e-3 ;												# ATTENTION unit in kW
+let k_sun['CRPP']:= 0.12;
+let specQ_people['CRPP']:= 54.5082e-3;										# ATTENTION unit in kW
+
+###########BUILDING SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['CRPP',1] := 440.3/FloorArea['CRPP'];										# ATTENTION unit in kW
+let specElec['CRPP',2] := 440.3/FloorArea['CRPP'];										# ATTENTION unit in kW
+let specElec['CRPP',3] := 440.3/FloorArea['CRPP'];										# ATTENTION unit in kW
+let specElec['CRPP',4] := 440.3/FloorArea['CRPP'];										# ATTENTION unit in kW
+let specElec['CRPP',5] := 95.2/FloorArea['CRPP'];
+let specElec['CRPP',6] := 0;	

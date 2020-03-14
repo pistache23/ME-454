@@ -1,0 +1,17 @@
+let Buildings := Buildings union {'CE'};								# Add "BuildCEg1" to set of BuildCEgs
+let MediumTempBuildings := MediumTempBuildings union {'CE'}; 		# Decide if it belongs to Medium or Low Temperature BuildCEgs
+
+###########BUILDCEG SPECIFIC PARAMETER  Time  CEdependend ##########################
+
+let FloorArea['CE'] := 16655;
+let k_th['CE']:= 0.00971 ;												# ATTENTION unit CE kW
+let k_sun['CE']:= 0.01;
+let specQ_people['CE']:= 0.0545082;										# ATTENTION unit CE kW
+
+###########BUILDCEG SPECIFIC PARAMETER  Time  Dependend ##########################
+let specElec['CE',1] := 328.6/FloorArea['CE'];										# ATTENTION unit CE kW
+let specElec['CE',2] := 328.6/FloorArea['CE'];	
+let specElec['CE',3] := 328.6/FloorArea['CE'];										# ATTENTION unit CE kW
+let specElec['CE',4] := 328.6/FloorArea['CE'];	
+let specElec['CE',5] := 71.1/FloorArea['CE'];										# ATTENTION unit CE kW
+let specElec['CE',6] := 0;	
