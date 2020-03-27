@@ -1,11 +1,11 @@
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set the efficiency of the Fuel Cell
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param eff_SOFC_el default 0.64;
-param eff_SOFC_th default 0.26;
+param eff_SOFC_el default 0.5;
+param eff_SOFC_th default 0.2;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set flow rate of natural gas as a function of efficiency
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let Flowin['Biogas','SOFC'] := Flowout['Electricity', 'SOFC'] / eff_SOFC_el;
-let Qheatingsupply['SOFC'] := Flowin['Biogas', 'SOFC'] * eff_SOFC_th
+let Flowin['Biogas','SOFC'] := Qheatingsupply['SOFC'] / eff_SOFC_th;
+let Flowout['Electricity', 'SOFC'] := Flowin['Biogas', 'SOFC'] * eff_SOFC_el

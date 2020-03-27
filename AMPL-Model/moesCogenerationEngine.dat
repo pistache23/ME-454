@@ -10,7 +10,7 @@ let Tminheating['Cogen'] := 70;
 
 /*Set the reference size of electricity flow (will be scaled with mult_t)
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let  Flowout['Electricity','Cogen'] := refSize;
+#let  Flowout['Electricity','Cogen'] := refSize;
 #let  Flowin['Natgas','Cogen'] := refSize;
 #let Qheatingsupply['Cogen']:=330;
 /*---------------------------------------------------------------------------------------------------------------------------------------

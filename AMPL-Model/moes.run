@@ -112,11 +112,10 @@ display FlowOutUnit;
 
 display Buildings;
 
-display usedroofArea;
+#display usedroofArea;
 
 display InvCost;
 
 display OpCost;
 
 display use;
-

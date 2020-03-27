@@ -9,16 +9,12 @@ let Tminheating['SOFC'] := 800;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set the reference size of electricity flow (will be scaled with mult_t)
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let Flowout['Electricity', 'SOFC'] := refSize;
+#let Flowout['Electricity', 'SOFC'] := refSize;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param i default 0.05;
-param N default 6;
-param AF default 0;
-
-let AF := ((1+i)^N - 1)/(i*(i+1)^N);
-
-
 let cinv1['SOFC'] := 0;			#  [CHF]
-let cinv2['SOFC'] := 18700/AF;			# continious investment cost [CHF/kW]
+let cinv2['SOFC'] := 18700*IC;			# continious investment cost [CHF/kW]
+
+#let cop1t['SOFC'] := 5;			#  [CHF]
+#let cop2t['SOFC'] := 500;			# continious investment cost [CHF/kW]
