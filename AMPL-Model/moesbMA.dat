@@ -6,7 +6,7 @@ let MediumTempBuildings := MediumTempBuildings union {'MA'}; 		# Decide if it be
 let FloorArea['MA'] := 14018;
 let k_th['MA']:= 0.00985 ;												# ATTENTION unit MA kW
 let k_sun['MA']:= 0.18;
-let specQ_people['MA']:= 0.0545082;										# ATTENTION unit MA kW
+let specQ_people['MA']:= 5.4449e-3;										# ATTENTION unit MA kW
 
 ###########BUILDMAG SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['MA',1] := 1513.8/FloorArea['MA'];										# ATTENTION unit MA kW

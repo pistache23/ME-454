@@ -6,7 +6,7 @@ let MediumTempBuildings := MediumTempBuildings union {'GR'}; 		# Decide if it be
 let FloorArea['GR'] := 9997;
 let k_th['GR']:= 0.00297 ;												# ATTENTION unit GR kW
 let k_sun['GR']:= 0.01;
-let specQ_people['GR']:= 0.0545082;										# ATTENTION unit GR kW
+let specQ_people['GR']:= 5.4449e-3;									# ATTENTION unit GR kW
 
 ###########BUILDGRG SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['GR',1] := 222.7/FloorArea['GR'];										# ATTENTION unit GR kW

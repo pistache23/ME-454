@@ -8,7 +8,7 @@ let MediumTempBuildings := MediumTempBuildings union {'BI'}; 		# Decide if it be
 let FloorArea['BI'] := 4496;
 let k_th['BI']:= 4.21e-3 ;												# ATTENTION unit in kW
 let k_sun['BI']:= 0.07;
-let specQ_people['BI']:= 54.5082e-3;										# ATTENTION unit in kW
+let specQ_people['BI']:= 5.4449e-3;										# ATTENTION unit in kW
 
 ###########BUILDING SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['BI',1] := 113.2/FloorArea['BI'];										# ATTENTION unit in kW

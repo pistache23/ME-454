@@ -6,7 +6,7 @@ let LowTempBuildings := LowTempBuildings union {'ME'}; 		# Decide if it belongs 
 let FloorArea['ME'] := 17151;
 let k_th['ME']:= 0.00361 ;												# ATTENTION unit ME kW
 let k_sun['ME']:= 0.05;
-let specQ_people['ME']:= 0.0545082;										# ATTENTION unit ME kW
+let specQ_people['ME']:= 5.4449e-3;										# ATTENTION unit ME kW
 
 ###########BUILDMEG SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['ME',1] := 853.3/FloorArea['ME'];										# ATTENTION unit ME kW

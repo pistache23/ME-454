@@ -10,12 +10,18 @@ let Tminheating['Boiler'] := 120;
 
 /*Set the reference size of electricity flow (will be scaled with mult_t)
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-#let  Flowin['Natgas','Boiler'] := refSize;
+# let  Flowin['Natgas','Boiler'] := refSize;
 # let  Flowout['Electricity','Boiler'] := refSize;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let cop2t['Boiler'] := 25.52*IC;			# continuous operating cost [CHF/kW]
+param interet default 0.08;
+param Nbryear default 15;
+param IC default 0;
 
-let cinv2['Boiler'] := 77.72*IC;		# continuous investment cost [CHF/kW]
+let IC := interet*(interet+1)^Nbryear/((interet+1)^Nbryear-1);
+
+let cop2t['Boiler'] := 2.91*IC;			# continuous operating cost [CHF/h]
+
+let cinv2['Boiler'] := 77720*IC;		# continuous investment cost [CHF/year]

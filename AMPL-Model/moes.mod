@@ -39,11 +39,8 @@ param refSize default 1000;										# reference size of the utilities
 param Text{t in Time};  										# ambient temperature [C]
 param Tint default 21;											# internal set point temperature [C]
 param specElec{Buildings,Time} default 0;						# specific  electricity consumption [kW/m2]
-param interest default 0.08;								#Interest rate
-param Nbryear default 20;										#Lifetime
-param IC default 0;													#Annualization factor
-
-let IC := interest*(interest+1)^Nbryear/((interest+1)^Nbryear-1);
+param T_lake{Time};
+param T_source{t in Time} := T_lake[t] - dTmin;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Calculation of heating demand
 ---------------------------------------------------------------------------------------------------------------------------------------*/
