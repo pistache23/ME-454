@@ -8,7 +8,7 @@ let LowTempBuildings := LowTempBuildings union {'CRPP'}; 		# Decide if it belong
 let FloorArea['CRPP'] := 10831;
 let k_th['CRPP']:= 5.25e-3 ;												# ATTENTION unit in kW
 let k_sun['CRPP']:= 0.12;
-let specQ_people['CRPP']:= 54.5082e-3;										# ATTENTION unit in kW
+let specQ_people['CRPP']:= 5.4449e-3;									# ATTENTION unit in kW
 
 ###########BUILDING SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['CRPP',1] := 440.3/FloorArea['CRPP'];										# ATTENTION unit in kW

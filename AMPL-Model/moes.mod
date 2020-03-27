@@ -39,6 +39,8 @@ param refSize default 1000;										# reference size of the utilities
 param Text{t in Time};  										# ambient temperature [C]
 param Tint default 21;											# internal set point temperature [C]
 param specElec{Buildings,Time} default 0;						# specific  electricity consumption [kW/m2]
+param T_lake{Time};
+param T_source{t in Time} := T_lake[t] - dTmin;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Calculation of heating demand
 ---------------------------------------------------------------------------------------------------------------------------------------*/

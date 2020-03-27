@@ -8,7 +8,7 @@ let LowTempBuildings := LowTempBuildings union {'EL'}; 		# Decide if it belongs 
 let FloorArea['EL'] := 22127;
 let k_th['EL']:= 3.66e-3 ;												# ATTENTION unit in kW
 let k_sun['EL']:= 0.10;
-let specQ_people['EL']:= 54.5082e-3;										# ATTENTION unit in kW
+let specQ_people['EL']:= 5.4449e-3;										# ATTENTION unit in kW
 
 ###########BUILDING SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['EL',1] := 396.0/FloorArea['EL'];										# ATTENTION unit in kW

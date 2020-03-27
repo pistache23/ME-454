@@ -139,6 +139,15 @@ param Text := 															# external temperature [C]
 6 -9
 ;
 
+param T_lake :=
+1 281
+2 282
+3 284
+4 286
+5 287
+6 278
+;
+
 param irradiation :=													# irradiation at each time step ATTENTION --> [kW/m2] 
 1 0.067
 2 0.057

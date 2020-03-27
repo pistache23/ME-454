@@ -6,7 +6,7 @@ let LowTempBuildings := LowTempBuildings union {'TCV'}; 		# Decide if it belongs
 let FloorArea['TCV'] := 6095;
 let k_th['TCV']:= 0.00483 ;												# ATTENTION unit in kW
 let k_sun['TCV']:= 0.09;
-let specQ_people['TCV']:= 0.0545082;										# ATTENTION unit in kW
+let specQ_people['TCV']:= 5.4449e-3;										# ATTENTION unit in kW
 
 ###########BUILDING SPECIFIC PARAMETER  Time  Dependend ##########################
 let specElec['TCV',1] := 565.9/FloorArea['TCV'];										# ATTENTION unit in kW
