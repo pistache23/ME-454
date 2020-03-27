@@ -6,7 +6,7 @@ IPESE, EPFL
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 This is a model which will be the base of the project. It has the definition of the generic sets, parameters and variables. It also
-includes equations that apply to the whole system. Depending on the modifications and additions to the model, the constraints are 
+includes equations that apply to the whole system. Depending on the modifications and additions to the model, the constraints are
 subject to change.
 ---------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -17,13 +17,13 @@ Generic Sets
 set Buildings default {};										# set of buildings
 set MediumTempBuildings default {};								# set of buildings heated by medium temperature loop
 set LowTempBuildings default {};								# set of buildings heated by low temperature loop
-set Time default {}; 											# time segments of the problem 
+set Time default {}; 											# time segments of the problem
 set Technologies default {};									# technologies to provide heating cooling and elec
 set Grids default {};											# grid units to buy resources (fuel, electricity etc.)
 set Utilities := Technologies union Grids;						# combination of technologies and grids
 set Layers default {};											# resources to provide fuel, elec, etc.
 set HeatingLevel default {};									# low and medium temlerature levels
-set UtilityType default {};										# type of the utility: heating, cooling, elec	
+set UtilityType default {};										# type of the utility: heating, cooling, elec
 set UtilitiesOfType{UtilityType} default {};					# utilities assigned to their respective utility type
 set UtilitiesOfLayer{Layers} default {};
 
@@ -39,6 +39,11 @@ param refSize default 1000;										# reference size of the utilities
 param Text{t in Time};  										# ambient temperature [C]
 param Tint default 21;											# internal set point temperature [C]
 param specElec{Buildings,Time} default 0;						# specific  electricity consumption [kW/m2]
+param interest default 0.08;								#Interest rate
+param Nbryear default 20;										#Lifetime
+param IC default 0;													#Annualization factor
+
+let IC := interest*(interest+1)^Nbryear/((interest+1)^Nbryear-1);
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Calculation of heating demand
 ---------------------------------------------------------------------------------------------------------------------------------------*/
@@ -48,7 +53,7 @@ param k_sun{Buildings} default 0;								# solar radiation coefficient [−]
 param share_q_e default 0.8; 									# share of internal gains from electricity [-]
 param specQ_people{Buildings} default 0;						# specific average internal gains from people [kW/m2]
 param Qheating{b in Buildings, t in Time} :=
-		if Text[t] < 16  then 
+		if Text[t] < 16  then
 			max(FloorArea[b]*(k_th[b]*(Tint-Text[t]) - k_sun[b]*irradiation[t]-specQ_people[b] - share_q_e*specElec[b,t]),0)
 		else
 			0
@@ -57,9 +62,9 @@ param Qheating{b in Buildings, t in Time} :=
 
 param Qheatingdemand{h in HeatingLevel, t in Time} :=
 	if h == 'MediumT' then
-		sum{b in MediumTempBuildings} Qheating[b,t]        		
+		sum{b in MediumTempBuildings} Qheating[b,t]
 	else
-		sum{b in LowTempBuildings} Qheating[b,t]				
+		sum{b in LowTempBuildings} Qheating[b,t]
 	;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
@@ -146,14 +151,14 @@ subject to zero_constraint2{t in Time}:
 Resource balance constraints (except for electricity): flowin = flowout
 ---------------------------------------------------------------------------------------------------------------------------------------*/
 subject to inflow_cstr {l in Layers, u in UtilitiesOfLayer[l], t in Time}:
-	FlowInUnit[l, u, t] = mult_t[u,t] * Flowin[l,u]; 
+	FlowInUnit[l, u, t] = mult_t[u,t] * Flowin[l,u];
 subject to outflow_cstr {l in Layers, u in UtilitiesOfLayer[l], t in Time}:
-	FlowOutUnit[l, u, t] = mult_t[u,t] * Flowout[l,u]; 
+	FlowOutUnit[l, u, t] = mult_t[u,t] * Flowout[l,u];
 subject to balance_cstr {l in Layers, t in Time: l != 'Electricity'}:
 	sum{u in UtilitiesOfLayer[l]} FlowInUnit[l,u,t] = sum{u in UtilitiesOfLayer[l]} FlowOutUnit[l,u,t];
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
-Electricity balance constraints: building demand + utility cons = utility supply 
+Electricity balance constraints: building demand + utility cons = utility supply
 ---------------------------------------------------------------------------------------------------------------------------------------*/
 subject to electricity_balance{t in Time}:
 	Edemand[t] + sum{u in UtilitiesOfType['ElectricityCons']} FlowInUnit['Electricity',u,t] = sum{u in UtilitiesOfType['ElectricitySup']} FlowOutUnit['Electricity',u,t];
@@ -168,15 +173,15 @@ param cop1t{Technologies} default 0;							# fixed cost of the technology [CHF/h
 param cop2t{Technologies} default 0;							# variable cost of the technology [CHF/h]
 
 param cop1{u in Utilities} = 									# fixed cost of the utility [CHF/h]
-	if (exists{g in Grids} (g = u)) then 
-		0 
-	else 
+	if (exists{g in Grids} (g = u)) then
+		0
+	else
 		cop1t[u]
 	;
 param cop2{u in Utilities} = 									# variable cost of the utility [CHF/h]
-	if (exists{g in Grids} (g = u)) then 
-		cop2g[u] 
-	else 
+	if (exists{g in Grids} (g = u)) then
+		cop2g[u]
+	else
 		cop2t[u]
 	;
 param cinv1{t in Technologies} default 0;						# fixed investment cost of the utility [CHF/year]
@@ -197,8 +202,3 @@ subject to ic_cstr:
 Objective function
 ---------------------------------------------------------------------------------------------------------------------------------------*/
 minimize Totalcost:InvCost + OpCost;
-
-
-
-
-

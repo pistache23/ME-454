@@ -1,24 +1,18 @@
 /*---------------------------------------------------------------------------------------------------------------------------------------
-Set the maximum scaling factor of PV
+Set the maximum scaling factor
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let  Fmax['PV'] := refSize;
+let  Fmax['HP2stage'] := refSize;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
-Set the reference size of electricity flow (will be scaled with mult_t)
+Set the minimum temperature of the Two-Stage Heat Pump
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let  Flowout['Electricity','PV'] := refSize;
+let Tminheating ['HP2stage'] := 55;
+
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param i default 0.05;
-param N default 20;
-param AF default 0;
 
-let AF := ((1+i)^N - 1)/(i*(i+1)^N);
+let cinv1['HP2stage'] := 2.6358e+04;				#  [CHF]
 
-let cinv1['PV'] := 1100000*AF;			#  [CHF]
-                                        # EUR 1100/KWp
-                                        # Fmax['PV'] 1000*1KWp
-let cinv2['PV'] := 33;			# continious investment cost [CHF/kWp]
-                                # EUR 33/KWp
+let cinv2['HP2stage'] := 11.3858 ;			# continious investment cost [CHF/kW]

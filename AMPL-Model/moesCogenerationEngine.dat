@@ -1,24 +1,25 @@
 /*---------------------------------------------------------------------------------------------------------------------------------------
-Set the maximum scaling factor of PV
+Set the maximum scaling factor
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let  Fmax['PV'] := refSize;
+let  Fmax['Cogen'] := refSize;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
-Set the reference size of electricity flow (will be scaled with mult_t)
+Set the minimum temperature of the boiler
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let  Flowout['Electricity','PV'] := refSize;
+let Tminheating['Cogen'] := 70;
 
+/*Set the reference size of electricity flow (will be scaled with mult_t)
+---------------------------------------------------------------------------------------------------------------------------------------*/
+#let  Flowout['Electricity','Cogen'] := refSize;
+#let  Flowin['Natgas','Cogen'] := refSize;
+#let Qheatingsupply['Cogen']:=330;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param i default 0.05;
-param N default 20;
-param AF default 0;
 
-let AF := ((1+i)^N - 1)/(i*(i+1)^N);
+#https://www.energy.gov/sites/prod/files/2016/09/f33/CHP-Recip%20Engines.pdf
+let cinv1['Cogen'] := 1380*IC;			#  [CHF]
 
-let cinv1['PV'] := 1100000*AF;			#  [CHF]
-                                        # EUR 1100/KWp
-                                        # Fmax['PV'] 1000*1KWp
-let cinv2['PV'] := 33;			# continious investment cost [CHF/kWp]
-                                # EUR 33/KWp
+let cinv2['Cogen'] := 1650*IC;			# continious investment cost [CHF/kW]
+
+#let cinv2['Cogen'] := 2.20*IC;			# continious investment cost [CHF/kW]
