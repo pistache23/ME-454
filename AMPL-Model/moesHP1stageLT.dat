@@ -5,7 +5,7 @@ let  Fmax['HP1stageLT'] := refSize;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set the minimum temperature of the boiler
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-let Tminheating['HP1stageLT'] := Theating['LowT'] + dTmin;
+let Tminheating['HP1stageLT'] := 50 + dTmin;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set the reference size of electricity flow (will be scaled with mult_t)
 ---------------------------------------------------------------------------------------------------------------------------------------*/
@@ -18,6 +18,6 @@ param IC_HPLT default 0;
 
 let IC_HPLT := interest*(interest+1)^N_HPLT/((interest+1)^N_HPLT-1);
 
-let cinv1['HP2stage'] := 38359.89*IC_HPLT;				#  [CHF]
+let cinv1['HP1stageLT'] := 38359.89*IC_HPLT;				#  [CHF]
 
-let cinv2['HP2stage'] := 45.9280*IC_HPLT;			# continious investment cost [CHF/kW]
+let cinv2['HP1stageLT'] := 45.9280*IC_HPLT;			# continious investment cost [CHF/kW]
