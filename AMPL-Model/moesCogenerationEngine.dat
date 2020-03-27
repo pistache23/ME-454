@@ -16,15 +16,14 @@ let Tminheating['Cogen'] := 70;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param interet default 0.08;
-param Nbryear default 20;
-param IC default 0;
+param N_Cogen default 20;
+param IC_Cogen default 0;
 
-let IC := interet*(interet+1)^Nbryear/((interet+1)^Nbryear-1);
+let IC_Cogen := interest*(interest+1)^N_Cogen/((interest+1)^N_Cogen-1);
 
 #https://www.energy.gov/sites/prod/files/2016/09/f33/CHP-Recip%20Engines.pdf
-let cinv1['Cogen'] := 1326.37*IC;			#  [CHF]
+let cinv1['Cogen'] := 1326.37*IC_Cogen;			#  [CHF]
 
-let cinv2['Cogen'] := 1585.88*IC;			# continious investment cost [CHF/kW]
+let cinv2['Cogen'] := 1585.88*IC_Cogen;			# continious investment cost [CHF/kW]
 
 #let cinv2['Cogen'] := 2.20*IC;			# continious investment cost [CHF/kW]

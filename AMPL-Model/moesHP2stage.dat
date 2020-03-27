@@ -12,7 +12,11 @@ let Tminheating ['HP2stage'] := 55;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
+param N_HP2stage default 20;
+param IC_HP2stage default 0;
+let IC_HP2stage := ((1+interest)^N_HP2stage - 1)/(interest*(interest+1)^N_HP2stage);
 
+#Annualization Factor already included
 let cinv1['HP2stage'] := 2.6358e+04;				#  [CHF]
 
 let cinv2['HP2stage'] := 11.3858 ;			# continious investment cost [CHF/kW]

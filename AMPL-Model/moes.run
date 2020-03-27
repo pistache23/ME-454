@@ -6,6 +6,7 @@ model moes.mod;
 data moes.dat;
 
 param interest default 0.08;
+param DTmin := 5;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Load building 1 data
@@ -59,17 +60,22 @@ data moesPV.dat;
 model moesCogenerationEngine.mod;
 data moesCogenerationEngine.dat;
 
+model moesSOFC.mod;
+data moesSOFC.dat;
+
 model moesHP2stage.mod;
 data moesHP2stage.dat;
 
+#When HP1Stage included costs = 0
 model moesHP1stageLT.mod;
 data moesHP1stageLT.dat;
 
 model moesHP1stageMT.mod;
 data moesHP1stageMT.dat;
 
-model moesSOFC.mod;
-data moesSOFC.dat;
+
+
+
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set the grid parameters: resource flow and fmax
@@ -119,3 +125,5 @@ display InvCost;
 display OpCost;
 
 display use;
+
+display COP_HP1stageLT

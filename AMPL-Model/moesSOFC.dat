@@ -13,8 +13,13 @@ Set the reference size of electricity flow (will be scaled with mult_t)
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
+param N_SOFC default 6;
+param IC_SOFC default 0;
+
+let IC_SOFC := interest*(interest+1)^N_SOFC/((interest+1)^N_SOFC-1);
+
 let cinv1['SOFC'] := 0;			#  [CHF]
-let cinv2['SOFC'] := 18700*IC;			# continious investment cost [CHF/kW]
+let cinv2['SOFC'] := 18700*IC_SOFC;			# continious investment cost [CHF/kW]
 
 #let cop1t['SOFC'] := 5;			#  [CHF]
 #let cop2t['SOFC'] := 500;			# continious investment cost [CHF/kW]

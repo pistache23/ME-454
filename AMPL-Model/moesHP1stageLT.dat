@@ -13,12 +13,11 @@ let  Flowin['Electricity','HP1stageLT'] := refSize;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param i_HPLT default 0.08;
-param HPLT_year default 15;
-param ICLT default 0;
+param N_HPLT default 15;
+param IC_HPLT default 0;
 
-let ICLT := i_HPLT*(i_HPLT+1)^HPLT_year/((i_HPLT+1)^HPLT_year-1);
+let IC_HPLT := interest*(interest+1)^N_HPLT/((interest+1)^N_HPLT-1);
 
-let cinv1['HP2stage'] := 38359.89*ICLT;				#  [CHF]
+let cinv1['HP2stage'] := 38359.89*IC_HPLT;				#  [CHF]
 
-let cinv2['HP2stage'] := 45.9280*ICLT;			# continious investment cost [CHF/kW]
+let cinv2['HP2stage'] := 45.9280*IC_HPLT;			# continious investment cost [CHF/kW]
