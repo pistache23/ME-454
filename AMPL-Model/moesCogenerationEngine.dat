@@ -23,8 +23,8 @@ param IC default 0;
 let IC := interet*(interet+1)^Nbryear/((interet+1)^Nbryear-1);
 
 #https://www.energy.gov/sites/prod/files/2016/09/f33/CHP-Recip%20Engines.pdf
-let cinv1['Cogen'] := 1380*IC;			#  [CHF]
+let cinv1['Cogen'] := 1326.37*IC;			#  [CHF]
 
-let cinv2['Cogen'] := 1650*IC;			# continious investment cost [CHF/kW]
+let cinv2['Cogen'] := 1585.88*IC;			# continious investment cost [CHF/kW]
 
 #let cinv2['Cogen'] := 2.20*IC;			# continious investment cost [CHF/kW]
