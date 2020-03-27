@@ -5,9 +5,6 @@ Load the main model and its data
 model moes.mod;
 data moes.dat;
 
-param interest default 0.08;
-param DTmin := 5;
-
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Load building 1 data
 ---------------------------------------------------------------------------------------------------------------------------------------*/
@@ -126,4 +123,5 @@ display OpCost;
 
 display use;
 
-display COP_HP1stageLT
+display COP_HP1stageLT;
+display COP_HP1stageMT;

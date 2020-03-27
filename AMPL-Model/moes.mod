@@ -41,6 +41,8 @@ param Tint default 21;											# internal set point temperature [C]
 param specElec{Buildings,Time} default 0;						# specific  electricity consumption [kW/m2]
 param T_lake{Time};
 param T_source{t in Time} := T_lake[t] - dTmin;
+param interest default 0.08;									# interest rate
+param eff_Carnot default 0.55;									# Carnot efficiency
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Calculation of heating demand
 ---------------------------------------------------------------------------------------------------------------------------------------*/
