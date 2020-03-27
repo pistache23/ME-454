@@ -11,14 +11,13 @@ let  Flowout['Electricity','PV'] := refSize;
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
 ---------------------------------------------------------------------------------------------------------------------------------------*/
-param i default 0.05;
-param N default 20;
-param AF default 0;
+param N_PV default 20;
+param IC_PV default 0;
 
-let AF := ((1+i)^N - 1)/(i*(i+1)^N);
+let IC_PV := ((1+interest)^N_PV - 1)/(interest*(interest+1)^N_PV);
 
-let cinv1['PV'] := 1100000*AF;			#  [CHF]
+let cinv1['PV'] := 1100000*IC_PV;			#  [CHF]
                                         # EUR 1100/KWp
                                         # Fmax['PV'] 1000*1KWp
-let cinv2['PV'] := 33;			# continious investment cost [CHF/kWp]
+let cinv2['PV'] := 33*IC_PV;			# continious investment cost [CHF/kWp]
                                 # EUR 33/KWp

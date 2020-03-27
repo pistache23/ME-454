@@ -15,13 +15,12 @@ let Tminheating['Boiler'] := 120;
 
 /*---------------------------------------------------------------------------------------------------------------------------------------
 Set cost parameter
----------------------------------------------------------------------------------------------------------------------------------------*/
-param interet default 0.08;
-param Nbryear default 15;
-param IC default 0;
+---------------------------------------------------------------------------------------------------------------------------------------*/  		#years
+param N_Boiler default 15;
+param IC_Boiler default 0;
 
-let IC := interet*(interet+1)^Nbryear/((interet+1)^Nbryear-1);
+let IC_Boiler := interest*(interest+1)^N_Boiler/((interest+1)^N_Boiler-1);
 
-let cop2t['Boiler'] := 2.91*IC;			# continuous operating cost [CHF/h]
+let cop2t['Boiler'] := 2.91*IC_Boiler;			# continuous operating cost [CHF/h]
 
-let cinv2['Boiler'] := 77720*IC;		# continuous investment cost [CHF/year]
+let cinv2['Boiler'] := 77720*IC_Boiler;		# continuous investment cost [CHF/year]
