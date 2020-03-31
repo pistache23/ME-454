@@ -10,4 +10,4 @@ param COP_HP1stageMT{t in Time}:= (eff_Carnot*T_sinkMT/(T_sinkMT - T_source[t]))
 Set flow rate of electricity as a function of HP
 ---------------------------------------------------------------------------------------------------------------------------------------*/
 subject to HPMT_elec{t in Time}:
-	Flowin['Electricity','HP1stageMT'] * mult_t['HP1stageMT',t] = Qheatingsupply['HP1stageMT'] / COP_HP1stageMT[t];
+	Flowin['Electricity','HP1stageMT']  * mult_t['HP1stageMT',t] = Qheatingsupply['HP1stageMT'] * mult_t['HP1stageMT',t] / COP_HP1stageMT[t];
